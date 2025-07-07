@@ -143,7 +143,7 @@ def plot_contamination(report, class_counts):
                         EZChart(plt, theme='epi2melabs', height='400px')
 
                         #mapped to vector, nonvector, and both
-                        vector_file_path = os.path.join(contam_class_counts, f"{sample}_vector_vs_nonvector.tsv")
+                        vector_file_path = os.path.join(df_class_counts, f"{sample}_vector_vs_nonvector.tsv")
                         df_vector_class = pd.read_csv(vector_file_path, sep='\t')
                         plt = ezc.barplot(
                             data=df_vector_class,
