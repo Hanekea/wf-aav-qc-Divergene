@@ -84,13 +84,23 @@ def plot_itr_coverage(report, coverage_file):
                             EZChart(plt, theme='epi2melabs', height='300px')
 
 
-def plot_contamination(report, class_counts):
+def plot_contamination(report, class_counts, vector_out_path):
     """Make report section with contamination plots.
 
     Two plots: (1) mapped/unmapped; (2) mapped reads per reference
     """
     df_class_counts = pd.read_csv(
         class_counts,
+        sep='\t',
+        dtype={
+            'Reference': str,
+            'Number of alignments': np.uint32,
+            'Percentage of alignments': np.float32,
+            'sample_id': str
+        }
+    )
+    df_vector_class = pd.read_csv(
+        vector_out_path,
         sep='\t',
         dtype={
             'Reference': str,
