@@ -238,8 +238,8 @@ def main(args):
             names = names[0]
         fastcat.SeqSummary(stats, sample_names=names)
 
-    contam_class_counts_path = Path(args.contam_class_counts)
-    vector_out_path = args.contam_class_counts.parent / f"{args.sample_id}_vector_vs_nonvector.tsv"
+    contam_path = Path(args.contam_class_counts)
+    vector_out_path = contam_path.parent / f"{args.sample_id}_vector_vs_nonvector.tsv"
     
     plot_contamination(
         report,
