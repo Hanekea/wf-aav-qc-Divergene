@@ -125,7 +125,8 @@ def main(args):
     })
 
     #write to TSV file
-    vector_out_path = args.contam_class_counts.parent / f"{args.sample_id}_vector_vs_nonvector.tsv"
+    contam_path = Path(args.contam_class_counts) #convert contam_class_counts to path
+    vector_out_path = args.contam_path.parent / f"{args.sample_id}_vector_vs_nonvector.tsv"
     df_vector_class.to_csv(vector_out_path, sep='\t', index=False)
 
     print(f"Vector/non-vector classification saved to {vector_out_path}")
