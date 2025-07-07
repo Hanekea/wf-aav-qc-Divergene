@@ -12,7 +12,6 @@ from ezcharts.layout.snippets.table import DataTable
 from pathlib import Path
 import numpy as np
 import pandas as pd
-import os as os
 
 from .util import get_named_logger, wf_parser  # noqa: ABS101
 
@@ -154,7 +153,7 @@ def plot_contamination(report, class_counts, vector_out_path):
                         EZChart(plt, theme='epi2melabs', height='400px')
 
                         #mapped to vector, nonvector, and both
-                        vector_file_path = os.path.join(df_vector_class, f"{sample}_vector_vs_nonvector.tsv")
+                        vector_file_path = str(vector_out_path)
                         df_vector_class = pd.read_csv(vector_file_path, sep='\t')
                         plt = ezc.barplot(
                             data=df_vector_class,
