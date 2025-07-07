@@ -240,7 +240,7 @@ def main(args):
 
     plot_contamination(
         report,
-        args.contam_class_counts)
+        args.contam_class_counts, args.vector_out_path)
     plot_trucations(report, args.truncations)
     plot_itr_coverage(report, args.itr_coverage)
     plot_aav_structures(report, args.aav_structures)
