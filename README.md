@@ -73,12 +73,12 @@ Nextflow and provide a list of all parameters
 available for the workflow as well as an example command:
 
 ```
-nextflow run epi2me-labs/wf-aav-qc --help
+nextflow run Hanekea/wf-aav-qc --help
 ```
 To update a workflow to the latest version on the command line use
 the following command:
 ```
-nextflow pull epi2me-labs/wf-aav-qc
+nextflow pull Hanekea/wf-aav-qc
 ```
 
 A demo dataset is provided for testing of the workflow.
@@ -89,7 +89,7 @@ tar -xzvf wf-aav-qc-demo.tar.gz
 ```
 The workflow can then be run with the downloaded demo data using:
 ```
-nextflow run epi2me-labs/wf-aav-qc \
+nextflow run Hanekea/wf-aav-qc \
 	--fastq 'wf-aav-qc-demo/simulated_reads.fq' \
 	--itr1_end 156 \
 	--itr1_start 11 \
