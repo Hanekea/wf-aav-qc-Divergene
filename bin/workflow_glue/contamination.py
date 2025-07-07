@@ -21,7 +21,7 @@ def argparser():
         type=Path)
     parser.add_argument(
         '--sample_id',
-        help="sample ID")
+        help="sample ID", required=True)
     parser.add_argument(
         '--transgene_fasta',
         help="The transgene plasmid fasta sequence")
