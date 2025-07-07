@@ -255,7 +255,7 @@ process contamination {
     """
     workflow-glue contamination \
         --bam_info bam_info.tsv \
-        --sample_id "$meta.alias" \
+        --sample_id "$sample_id" \
         --transgene_fasta transgene.fa \
         --n_reads $n_reads \
         --ref_ids ref_ids.json \
