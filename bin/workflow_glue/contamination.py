@@ -87,3 +87,45 @@ def main(args):
     df_lengths['sample_id'] = args.sample_id
 
     df_contam_class.to_csv(args.contam_class_counts, sep='\t')
+
+    '''START OF NEW MODIFICATIONS'''
+    #map reads to contam class it aligns with 
+    read_to_classes = df_bam.groupby('Read')['contam_class'].apply(set)
+    vector = 'Transgene'
+
+    map_tovector = 0
+    map_tononvector = 0
+    map_toboth = 0 
+
+    for classes in read_to_classes:
+        has_vector = vector in classes
+        has_nonvector = any(c != map_tovector for c in classes if pd.notna(c))
+
+        if has_vector and not has_nonvector:
+            map_tovector += 1
+        elif not has_vector and has_nonvector:
+            map_tononvector += 1
+        elif has_vector and has_nonvector:
+            map_toboth += 1
+        else:
+            continue
+
+    total_reads_classified = map_tovector + map_tononvector + map_toboth
+
+    #creates dataframe for output file
+    df_vector_class = pd.DataFrame({
+        'Reference': ['Map to Vector', 'Map to Non-Vector', 'Map to Both'],
+        'Number of Alignments': [map_tovector, map_tononvector, map_toboth],
+        'Alignment Percentages': [
+            100 * map_tovector / total_reads_classified if total_reads_classified else 0,
+            100 * map_tononvector / total_reads_classified if total_reads_classified else 0,
+            100 * map_toboth / total_reads_classified if total_reads_classified else 0,
+        ],
+        'sample_id': args.sample_id
+    })
+
+    #write to TSV file
+    vector_out_path = args.contam_class_counts.parent / f"{args.sample_id}_vector_vs_nonvector.tsv"
+    df_vector_class.to_csv(vector_out_path, sep='\t', index=False)
+
+    print(f"Vector/non-vector classification saved to {vector_out_path}")
