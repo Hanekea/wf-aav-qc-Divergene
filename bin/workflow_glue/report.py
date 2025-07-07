@@ -101,7 +101,7 @@ def plot_contamination(report, class_counts):
 
     with report.add_section("Contamination", "Contamination"):
         p(
-            "These two plots show mapping summaries that can highlight "
+            "These three plots show mapping summaries that can highlight "
             "potential contamination issues."
         )
         p(
@@ -112,6 +112,11 @@ def plot_contamination(report, class_counts):
             "The second plot breaks down the the alignment numbers into the "
             "specific references (host, helper plasmid, Rep-Cap plasmid, and transgene "
             "plasmid)."
+        )
+        p(
+            "The third plot displays the distribution of reads that map to the vector" 
+            "(transgene), non-vector references (host, helper plasmid, Rep-cap plasmid)," 
+            "or reads that map to both."
         )
 
         tabs = Tabs()
@@ -134,6 +139,18 @@ def plot_contamination(report, class_counts):
                         plt = ezc.barplot(
                             data=df_alns, x='Reference', y='Percentage of alignments')
                         plt.title = dict(text='Alignment counts per target')
+                        EZChart(plt, theme='epi2melabs', height='400px')
+
+                        #mapped to vector, nonvector, and both
+                        vector_file_path = os.path.join(contam_class_counts, f"{sample}_vector_vs_nonvector.tsv")
+                        df_vector_class = pd.read_csv(vector_file_path, sep='\t')
+                        plt = ezc.barplot(
+                            data=df_vector_class,
+                            x='Reference', 
+                            y='Number of Alignments',
+                            color=['#3498db', '#e74c3c', '#2ecc71']
+                        )
+                        plt.title = dict(text='Vector vs Non-Vector Classification')
                         EZChart(plt, theme='epi2melabs', height='400px')
 
 
