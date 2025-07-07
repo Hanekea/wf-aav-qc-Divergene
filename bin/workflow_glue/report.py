@@ -9,6 +9,7 @@ from ezcharts.components.ezchart import EZChart
 from ezcharts.components.reports import labs
 from ezcharts.layout.snippets import Grid, Tabs
 from ezcharts.layout.snippets.table import DataTable
+from pathlib import Path
 import numpy as np
 import pandas as pd
 import os as os
@@ -238,6 +239,7 @@ def main(args):
             names = names[0]
         fastcat.SeqSummary(stats, sample_names=names)
 
+    contam_class_counts_path = Path(args.contam_class_counts)
     vector_out_path = args.contam_class_counts.parent / f"{args.sample_id}_vector_vs_nonvector.tsv"
     
     plot_contamination(
