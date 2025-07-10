@@ -574,7 +574,8 @@ workflow pipeline {
             aav_structures.out.structure_counts.collectFile(keepHeader: true),
             software_versions.collect(),
             workflow_params,
-            workflow.manifest.version
+            workflow.manifest.version,
+            metadata.map { it.alias } //changed 7/10 run 3
         )
     emit:
         telemetry = workflow_params
