@@ -153,10 +153,9 @@ def plot_contamination(report, class_counts, vector_out_path):
                         EZChart(plt, theme='epi2melabs', height='400px')
 
                         #mapped to vector, nonvector, and both
-                        vector_file_path = str(vector_out_path)
-                        df_vector_class = pd.read_csv(vector_file_path, sep='\t')
+                        df_vector_sample = df_vector_class[df_vector_class['sample_id'] == sample] #changed 7/10 12:36
                         plt = ezc.barplot(
-                            data=df_vector_class,
+                            data=df_vector_sample, #changed 7/10 12:37
                             x='Reference', 
                             y='Number of Alignments',
                             color=['#3498db', '#e74c3c', '#2ecc71']
