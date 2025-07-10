@@ -417,7 +417,7 @@ process makeReport {
         path 'itr_coverage.tsv'
         path 'contam_class_counts.tsv'
         path 'structure_counts.tsv'
-        path "versions/*"
+        path  versions //changed 7/10 run 4
         path "params.json"
         val wf_version
     output:
