@@ -295,4 +295,8 @@ def argparser():
     parser.add_argument(
         "--wf_version", default='unknown',
         help="version of the executed workflow")
+    parser.add_argument( #changed 7/10 run 2
+        "--sample_id", required=True,
+        help="sample_id for contamination report generation"
+    )
     return parser
