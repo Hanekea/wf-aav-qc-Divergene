@@ -411,6 +411,7 @@ process makeReport {
     memory '4 GB'
     input:
         val metadata
+        val sample_id //changed 7/10 run 2(also workflow-glue)
         path stats, stageAs: "stats_*"
         path 'truncations.tsv'
         path 'itr_coverage.tsv'
@@ -435,7 +436,8 @@ process makeReport {
         --truncations truncations.tsv \
         --itr_coverage itr_coverage.tsv \
         --contam_class_counts contam_class_counts.tsv \
-        --aav_structures structure_counts.tsv
+        --aav_structures structure_counts.tsv \
+        --sample_id $sample_id
     """
 }
 
