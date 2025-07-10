@@ -250,6 +250,7 @@ process contamination {
 
     output:
         path('contam_class_counts.tsv'), emit: contam_class_counts
+        path('*_vector_vs_nonvector.tsv'), emit: vector_nonvector_table //changed 7/10 12:30
     script:
         def n_reads = meta['n_seqs']
     """
