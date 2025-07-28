@@ -569,6 +569,7 @@ workflow pipeline {
     
         report = makeReport(
             metadata,
+            sample_id, // added 7/28 run 7
             stats,
             truncations.out.locations.collectFile(keepHeader: true),
             itr_coverage.out.collectFile(keepHeader: true),
