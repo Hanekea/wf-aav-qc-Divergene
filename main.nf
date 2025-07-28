@@ -566,7 +566,7 @@ workflow pipeline {
         stats = for_report.stats.collect()
 
         wf_version = workflow.manifest.version // changed 7/28 run 6
-        sample_id = metadata.map { it.alias } //added 7/28 run 7
+        sample_id = metadata.map { it.alias }.first() //added 7/28 run 7, added .first() run 8
     
         report = makeReport(
             metadata,
