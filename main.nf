@@ -566,9 +566,11 @@ workflow pipeline {
         stats = for_report.stats.collect()
 
         wf_version = workflow.manifest.version // changed 7/28 run 6
+        sample_id = metadata.map { it.alias } //added 7/28 run 7
     
         report = makeReport(
             metadata,
+            sample_id, // added 7/28 run 7
             stats,
             truncations.out.locations.collectFile(keepHeader: true),
             itr_coverage.out.collectFile(keepHeader: true),
@@ -576,8 +578,7 @@ workflow pipeline {
             aav_structures.out.structure_counts.collectFile(keepHeader: true),
             software_versions.collect(),
             workflow_params,
-            wf_version, // changed 7/28 run 6
-            metadata.map { it.alias } //changed 7/10 run 3
+            wf_version // changed 7/28 run 6
         )
     emit:
         telemetry = workflow_params
