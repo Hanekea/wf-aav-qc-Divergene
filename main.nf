@@ -565,7 +565,7 @@ workflow pipeline {
         metadata = for_report.meta.collect()
         stats = for_report.stats.collect()
 
-        wf_version = Channel.value(workflow.manifest.version) // changed 7/28 run 6
+        wf_version = workflow.manifest.version // changed 7/28 run 6
     
         report = makeReport(
             metadata,
