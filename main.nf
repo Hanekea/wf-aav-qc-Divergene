@@ -565,6 +565,8 @@ workflow pipeline {
         metadata = for_report.meta.collect()
         stats = for_report.stats.collect()
 
+        wf_version = Channel.value(workflow.manifest.version) // changed 7/28 run 6
+    
         report = makeReport(
             metadata,
             stats,
@@ -574,7 +576,7 @@ workflow pipeline {
             aav_structures.out.structure_counts.collectFile(keepHeader: true),
             software_versions.collect(),
             workflow_params,
-            workflow.manifest.version,
+            wf_version, // changed 7/28 run 6
             metadata.map { it.alias } //changed 7/10 run 3
         )
     emit:
